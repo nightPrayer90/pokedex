@@ -2,7 +2,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
-    background: white;
+}
+
+.body-search-color {
+    background: wheat;
 }
 
 header {
@@ -107,19 +110,24 @@ main {
                 align-items: center;
                 justify-content: center;
                 margin-bottom: 60px;
-                
+                gap: 16px;
+
                 button {
                     background: #e53935;
                     width: 150px;
-                };
+                }
+
+                a {
+                    width: 50px;
+                    button {
+                        width: 100%;
+                        background: #d77775;
+                    }
+                }
             }
         }
-
     }
 }
-
-
-
 
 footer {
     display: flex;
