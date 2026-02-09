@@ -1,0 +1,92 @@
+.pokebox {
+    height: 400px;
+    width: 300px;
+    border-radius: 5%;
+    transform-origin: center;
+    padding: 16px;
+
+    .pokebox-sprite {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.pokebox-loaded {
+    background: red;
+    animation: popIn 0.1s ease-out 1;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pokebox-placeholder {
+    border-radius: 18px;
+    background: linear-gradient(90deg, #6f6f6f 0%, #989898 40%, #6f6f6f 100%);
+    background-size: 200% 100%;
+    animation: shimmer 4s linear infinite;
+}
+
+.type-normal {
+    background: #a8a77a;
+}
+.type-fire {
+    background: #ee8130;
+}
+.type-water {
+    background: #6390f0;
+}
+.type-electric {
+    background: #f7d02c;
+}
+.type-grass {
+    background: #7ac74c;
+}
+.type-ice {
+    background: #96d9d6;
+}
+.type-fighting {
+    background: #c22e28;
+}
+.type-poison {
+    background: #a33ea1;
+}
+.type-ground {
+    background: #e2bf65;
+}
+.type-flying {
+    background: #a98ff3;
+}
+.type-psychic {
+    background: #f95587;
+}
+.type-bug {
+    background: #a6b91a;
+}
+.type-rock {
+    background: #b6a136;
+}
+.type-ghost {
+    background: #735797;
+}
+.type-dragon {
+    background: #6f35fc;
+}
+.type-dark {
+    background: #705746;
+}
+.type-steel {
+    background: #b7b7ce;
+}
+.type-fairy {
+    background: #d685ad;
+}
+.type-unknown {
+    background: #68a090;
+}
+.type-shadow {
+    background: #3b2b4a;
+}
+.type-stellar {
+    background: #8fd3ff;
+}

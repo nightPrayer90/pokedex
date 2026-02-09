@@ -1,0 +1,22 @@
+* {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    color: white;
+    font-size: inherit;
+    font-family: "Lato-Regular";
+}
+
+.content {
+    height: fit-content;
+    width: 100%;
+    max-width: 1920px;
+}
+
+.hide-object {
+    display: none ;
+}

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Iner-Var";
+    src: url("../assets/fonts/Inter/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype");
+}
+
+
+
+@font-face {
+    font-family: "Lato-Regular";
+    src: url("../assets/fonts/Lato/Lato-Regular.ttf") format("truetype");
+}
+
+
+h1 {
+    font-family: "Iner-Var";
+    font-size: 56px;
+    font-weight: 800;
+    text-align: center;
+    color: #1e1e1e;
+}
+
+h2 {
+    font-family: "Iner-Var";
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+
+
+
+/* tablet */
+@media (max-width: 1280px) {
+    h1 {
+        font-size: 50px;
+    }
+}
+
+/* mobile */
+@media (max-width: 767px) {
+    h1 {
+        font-size: 48px;
+    }
+}

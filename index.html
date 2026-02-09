@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DA Pokedex</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/svg/favicon.png">
+
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/animation.css">
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/pokebox.css">
+
+    <script src="./scripts/apiFun.js" defer></script>
+    <script src="./scripts/helper.js" defer></script>
+    <script src="./scripts/template.js" defer></script>
+    <script src="./script.js" defer></script>
+
+</head>
+
+<body onload="init()">
+
+    <header>
+        <div class="content">
+
+            <div class="headder-left-bar">
+
+                <div class="header-logo-container">
+                    <img id="header-logo" src="./assets/img/logo.png" alt="">
+                </div>
+
+                <div class="burger-container">
+                    <button onclick="toggleBurger(`burger-menu-language`)"><img src="./assets/img/burger.png" alt="">
+                        <div class="settingsbox"><span id="language-setting">de</span></div>
+                    </button>
+
+                    <nav id="burger-menu-language" class="burger-menu">
+                        <ul>
+                            <li onclick="chooseBurgerLanguage(`de`)">
+                                <a>de</a>
+                            </li>
+                            <li onclick="chooseBurgerLanguage(`en`)">
+                                <a>en</a>
+                            </li>
+                            <li onclick="chooseBurgerLanguage(`fr`)">
+                                <a>fr</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="burger-container">
+                    <button onclick="toggleBurger(`burger-menu-quantity`)"><img src="./assets/img/settings.png" alt="">
+                        <div class="settingsbox"><span id="quantity-setting">15</span></div>
+                    </button>
+
+                    <nav id="burger-menu-quantity" class="burger-menu">
+                        <ul>
+                            <li onclick="chooseBurgerQuantity(5)">
+                                <a>5</a>
+                            </li>
+                            <li onclick="chooseBurgerQuantity(15)">
+                                <a>15</a>
+                            </li>
+                            <li onclick="chooseBurgerQuantity(30)">
+                                <a>30</a>
+                            </li>
+                            <li onclick="chooseBurgerQuantity(60)">
+                                <a>60</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <button class="button-text" onClick="loadButton()">
+                    <p>Laden</p>
+                </button>
+                <p id="header-loaded-pokemon">0</p>
+            </div>
+
+            <div class="headder-right-bar">
+                <form onsubmit="searchButton(event)">
+                    <input type="text" id="searchField" placeholder="search #number or string">
+                    <button><img src="./assets/img/search.png" alt=""></button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section>
+            <div class="content">
+                <h1> catch them all!</h1>
+
+                <div id="pokemon-loading-area">
+
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="content">
+
+        </div>
+    </footer>
+
+
+    <div id="loader-container" class="hide-object">
+        <div class="loader spin-animation">
+        </div>
+    </div>
+</body>
+
+</html>
