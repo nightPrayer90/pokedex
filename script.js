@@ -49,17 +49,10 @@ function loadButton() {
     if (buttonDivRef != null) buttonDivRef.remove();
 
     if (searchModeFlag) {
+        showLoadingSpinner();
         searchMode(false, inputFieldPlaceholder);
         renderLoadedPokemon();
     }
-    loadPokemons(pokemons.length + 1);
-
-    closeBurgerMenu();
-}
-
-function loadMoreButton(ref) {
-    const buttonDivRef = ref.parentElement;
-    if (buttonDivRef != null) buttonDivRef.remove();
     loadPokemons(pokemons.length + 1);
 
     closeBurgerMenu();
@@ -168,14 +161,11 @@ function buildSearchArray(searchString) {
 
 // #region Settings - burger menus ----------------------------------------------------------------
 function toggleBurger(menu) {
-    closeBurgerMenu();
+    if (menu == "burger-menu-quantity") changeClass("burger-menu-language", "open", false);
+    else changeClass("burger-menu-quantity", "open", false);
     toggleClass(menu, "open");
 }
 
-function closeBurgerMenu() {
-    changeClass("burger-menu-language", "open", false);
-    changeClass("burger-menu-quantity", "open", false);
-}
 
 function chooseBurgerLanguage(language) {
     loadingLanguage = language;
@@ -196,6 +186,10 @@ function chooseBurgerQuantity(quantity) {
     textRef.innerText = quantity;
 }
 
+function closeBurgerMenu() {
+    changeClass("burger-menu-language", "open", false);
+    changeClass("burger-menu-quantity", "open", false);
+}
 //#endregion
 
 //#region loading Spinner -------------------------------------------------------------------------

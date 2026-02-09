@@ -101,9 +101,25 @@ main {
                 padding: 0;
                 margin-bottom: 64px;
             }
+
+            .pokemon-loadMoreButton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 60px;
+                
+                button {
+                    background: #e53935;
+                    width: 150px;
+                };
+            }
         }
+
     }
 }
+
+
+
 
 footer {
     display: flex;
