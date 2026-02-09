@@ -4,6 +4,7 @@ const typeSprites = [];
 const searchArray = [];
 
 let maxLoadPokemonQuanitiy = 15;
+const lastPokemonIndex = 1325;
 let loadingLanguage = "de";
 let searchModeFlag = false;
 const inputFieldPlaceholder = "search #number or string";
@@ -18,15 +19,13 @@ function init() {
 async function loadFirstPokemons() {
     showLoadingSpinner();
     await fetchTypeSprites();
-    await loadPokemons(pokemons.length+1);
+    await loadPokemons(pokemons.length + 1);
 
     console.log(pokemons[0]);
 }
 
 async function loadPokemons(loadAt) {
-    const loadUntil = pokemons.length + maxLoadPokemonQuanitiy;
-    console.log("maxLoadPokemonQuanitiy " + maxLoadPokemonQuanitiy);
-
+    const loadUntil = Math.min(lastPokemonIndex, pokemons.length + maxLoadPokemonQuanitiy);
     showLoadingSpinner();
 
     // render empty preload boxes
@@ -41,26 +40,19 @@ async function loadPokemons(loadAt) {
 
         renderPokeBoxLoad(i, false);
     }
-
-    // render loading box
-    renderLoadMoreButton();
-
     hideLoadingSpinner();
 }
 
 //#region Button Functions ------------------------------------------------------------------------
-async function loadButton() {
+function loadButton() {
     const buttonDivRef = document.getElementById("pokebox-load-more");
     if (buttonDivRef != null) buttonDivRef.remove();
 
     if (searchModeFlag) {
         searchMode(false, inputFieldPlaceholder);
         renderLoadedPokemon();
-        loadPokemons(pokemons.length+1);
-        // hier müssen wir nochmal die gesamte liste laden!
-    } else {
-        loadPokemons(pokemons.length + 1);
     }
+    loadPokemons(pokemons.length + 1);
 
     closeBurgerMenu();
 }
@@ -73,7 +65,7 @@ function loadMoreButton(ref) {
     closeBurgerMenu();
 }
 
-function searchButton(event) {
+async function searchButton(event) {
     event.preventDefault();
 
     const inputFieldRef = document.getElementById("searchField");
@@ -81,10 +73,9 @@ function searchButton(event) {
 
     if (inputFieldRef.value != "") {
         inputFieldRef.placeholder = inputFieldRef.value;
-        searchMode(true, inputFieldRef.value);
+        searchMode(true, "[" + +searchArray.length + "] - " + inputFieldRef.value);
     } else {
         searchMode(false, inputFieldPlaceholder);
-        renderLoadMoreButton();
     }
 
     inputFieldRef.value = "";
@@ -113,16 +104,19 @@ function renderPokeBoxType(pokeboxRef, pokeID) {
     // box bk color
     changeClass("pokebox-" + pokeID, "type-" + pokemons[pokeID - 1].types[0].name, true);
 
+    let htmlString = "";
     // render type - images
+    htmlString = `<div id="pokebox-type-${pokeID}" class="pokekebox-loaded-types">`;
     for (let i = 0; i < pokemons[pokeID - 1].types.length; i++) {
         const spriteUrl = wrapTypeToSprite(pokemons[pokeID - 1].types[i].name);
-        pokeboxRef.innerHTML += pokeboxTypeImage(spriteUrl);
+        htmlString += pokeboxTypeImage(spriteUrl);
     }
-}
+    htmlString += `</div>`;
+    pokeboxRef.innerHTML += htmlString;
 
-function renderLoadMoreButton() {
-    const renderAreaRef = document.getElementById("pokemon-loading-area");
-    renderAreaRef.innerHTML += pokeboxLoadMoreTemplate();
+    if (pokemons[pokeID - 1].types.length == 2) {
+        changeClass("pokebox-type-" + pokeID, "type-" + pokemons[pokeID - 1].types[1].name, true);
+    }
 }
 
 function renderLoadCounter() {
@@ -131,12 +125,22 @@ function renderLoadCounter() {
 }
 
 function renderLoadedPokemon() {
-    resetLoadingArea();
-
-    for (let i = 0; i < pokemons.length-1; i++) {
-            renderPokeBoxLoad(pokemons[i].id, true);
-            renderPokeBoxLoad(pokemons[i].id, false);
+    for (let i = 1; i <= pokemons.length; i++) {
+        changeClass("pokebox-" + [i], "hide-object", false);
     }
+}
+
+/** Hide every rendered box, and then unhide all boxes form search array - it is much faster if i render all new */
+function renderSearchArray() {
+    for (let i = 1; i <= pokemons.length; i++) {
+        changeClass("pokebox-" + [i], "hide-object", true);
+    }
+
+    for (let i = 0; i < searchArray.length; i++) {
+        changeClass("pokebox-" + [searchArray[i]], "hide-object", false);
+    }
+
+    // TODO: DO Anything if we dont find a pokemon
 }
 
 //#endregion
@@ -147,17 +151,18 @@ function renderLoadedPokemon() {
 function buildSearchArray(searchString) {
     searchArray.length = 0;
 
-    resetLoadingArea();
+    //resetLoadingArea();
 
     for (let i = 0; i < pokemons.length; i++) {
         if (isSearchInString(pokemons[i].loolupName, searchString)) {
-            searchArray.push(pokemons[i].id);
-            renderPokeBoxLoad(searchArray.at(-1), true);
-            renderPokeBoxLoad(searchArray.at(-1), false);
+            let pokeID = pokemons[i].id;
+            if (pokeID > 1025) pokeID = pokemons[i].id - 8975;
+
+            searchArray.push(pokeID);
         }
     }
 
-    // TODO: DO Anything if we dont find a pokemon
+    renderSearchArray();
 }
 //#endregion
 
@@ -179,9 +184,9 @@ function chooseBurgerLanguage(language) {
     textRef.innerText = language;
 
     pokemons.length = 0;
-    searchMode(false, inputFieldPlaceholder)
+    searchMode(false, inputFieldPlaceholder);
     resetLoadingArea();
-    loadPokemons(pokemons.length+1);
+    loadPokemons(pokemons.length + 1);
 }
 
 function chooseBurgerQuantity(quantity) {

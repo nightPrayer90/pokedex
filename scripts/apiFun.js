@@ -1,5 +1,6 @@
 async function getPokemon(id) {
     try {
+        if (id>1025) {id= id+8975;}
         const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (pokemon.ok == false) throw new Error("pokemon");
         const pokemonData = await pokemon.json();

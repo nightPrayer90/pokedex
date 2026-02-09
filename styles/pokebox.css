@@ -1,23 +1,69 @@
 .pokebox {
     height: 400px;
     width: 300px;
-    border-radius: 5%;
+    border-radius: 20px;
     transform-origin: center;
-    padding: 16px;
-
-    .pokebox-sprite {
-        width: 200px;
-        height: 200px;
-    }
 }
 
 .pokebox-loaded {
-    background: red;
-    animation: popIn 0.1s ease-out 1;
+    animation: popIn 0.1s ease-out 1 forwards;
+    cursor: pointer;
 
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 0;
+    border: rgba(0, 0, 0, 0.2) solid 1px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.05s ease;
+
+    .pokebox-header-container {
+        height: 60px;
+        padding: 8px;
+    }
+
+    .pokebox-sprite-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        .pokebox-sprite-box {
+            background: radial-gradient(circle, rgba(245, 222, 179, 0.6) 0%, rgba(245, 222, 179, 0.25) 80%, rgba(245, 222, 179, 0.15) 100%);
+            border-radius: 10%;
+            border: rgba(0, 0, 0, 0.2) solid 1px;
+            width: 200px;
+            height: 200px;
+            display: flex;
+
+            .pokebox-sprite {
+                align-self: center;
+                justify-self: center;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .pokekebox-loaded-types {
+        width: 100%;
+        height: 28%;
+        border-radius: 5% 5% 20px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        .pokebox-type {
+            opacity: 100%;
+            width: 180px;
+            object-fit: contain;
+        }
+    }
+}
+
+.pokebox-loaded:hover {
+    transform: scale(1.02);
+    border: #ffd600 solid 4px;
 }
 
 .pokebox-placeholder {
@@ -28,43 +74,43 @@
 }
 
 .type-normal {
-    background: #a8a77a;
+    background: #c1c09c;
 }
 .type-fire {
     background: #ee8130;
 }
 .type-water {
-    background: #6390f0;
+    background: #4577e5;
 }
 .type-electric {
-    background: #f7d02c;
+    background: #e2bd27;
 }
 .type-grass {
-    background: #7ac74c;
+    background: #6ec53b;
 }
 .type-ice {
     background: #96d9d6;
 }
 .type-fighting {
-    background: #c22e28;
+    background: #e23b35;
 }
 .type-poison {
-    background: #a33ea1;
+    background: #a250a1;
 }
 .type-ground {
     background: #e2bf65;
 }
 .type-flying {
-    background: #a98ff3;
+    background: #9797e9;
 }
 .type-psychic {
     background: #f95587;
 }
 .type-bug {
-    background: #a6b91a;
+    background: #93a417;
 }
 .type-rock {
-    background: #b6a136;
+    background: #817a53;
 }
 .type-ghost {
     background: #735797;
@@ -73,10 +119,10 @@
     background: #6f35fc;
 }
 .type-dark {
-    background: #705746;
+    background: #3b2e25;
 }
 .type-steel {
-    background: #b7b7ce;
+    background: #b8d7ca;
 }
 .type-fairy {
     background: #d685ad;
@@ -89,4 +135,9 @@
 }
 .type-stellar {
     background: #8fd3ff;
+}
+
+
+.hide-object {
+    display: none ;
 }

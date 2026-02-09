@@ -12,7 +12,7 @@ header {
     justify-content: center;
     background: #e53935;
     background: linear-gradient(to bottom, #e53935 0%, #fa5957 100%);
-    border-bottom: #1e1e1e solid 12px;
+    border-bottom: #1e1e1e solid 6px;
     margin-bottom: 120px;
     height: 118px;
 

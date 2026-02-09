@@ -38,7 +38,6 @@ function searchMode(isSearchMode, inputPlaceholder) {
     logoRef.src = searchModeFlag ? "./assets/img/logo-search.png" : "./assets/img/logo.png";
 
     const inputFieldRef = document.getElementById("searchField");
-    console.log(inputPlaceholder);
     inputFieldRef.placeholder = inputPlaceholder;
 }
 
