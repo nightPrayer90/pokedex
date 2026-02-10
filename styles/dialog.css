@@ -8,25 +8,213 @@
     border-radius: 16px;
     border: none;
     color: white;
-    width: 688px;
+    width: 500px;
 
     div {
-        header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: white;
 
+        header.diag-top-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0;
+            border: none;
+            height: auto;
+
+            #diag-close-button {
+                align-self: flex-end;
+                box-shadow: none;
+                transform: none;
+                background: none;
+                width: 55px;
+                height: 55px;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            #diag-close-button:hover {
+                background: #1e1e1e;
+            }
+
+            #diag-pokemon-sprite {
+                height: 150px;
+                width: 150px;
+                margin-bottom: 16px;
+            }
+
+            h2 {
+                padding: 4px 8px;
+            }
         }
+
         section {
-            background: white
-
-        }
-        footer {
             background: white;
+            flex: 1;
+
+            .diag-button-bar {
+                display: flex;
+                flex-direction: row;
+                background-color: #1e1e1e;
+                width: 100%;
+                border-top: solid white 2px;
+
+                .diag-inner-button-bar {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    border-left: 1px solid white;
+                    border-right: 1px solid white;
+
+                    .diag-inner-button {
+                        width: 33.3%;
+                        background: #1e1e1e;
+                        font-family: "Iner-Var";
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                    .diag-inner-button:hover {
+                        background: #e53935;
+                    }
+                }
+            }
+
+            button {
+                width: 15%;
+                transform: none;
+                border-radius: 0;
+            }
+
+            .diag-content {
+                height: 330px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 8px 24px;
+
+                p,
+                span {
+                    font-family: "Lato-Regular";
+                    font-size: 20px;
+                    color: #1e1e1e;
+                }
+
+                img {
+                    top: 5px;
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 8px;
+                }
+            }
+
+            #diag-content-tab-1 {
+                .diag-size-bar {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                }
+
+                #diag-genera {
+                    font-family: "Lato-Bold";
+                }
+            }
+
+            #diag-content-tab-3 {
+                padding-bottom: 0;
+                display: flex;
+                #diag-evo-fam {
+                    font-family: "Lato-Bold";
+                }
+                #diag-evo-container {
+                    display: flex;
+                    align-self: center;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    row-gap: 0;
+                    column-gap: 24px;
+                    width: 95%;
+                    height: 100%;
+
+                    div {
+                        background-color: wheat;
+                        border: solid 1px #1e1e1e6c;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        img {
+                            width: 60%;
+                            height: 60%;
+                            object-fit: contain;
+                        }
+
+                        div {
+                            top: 15px;
+                            width: 30px;
+                            height: 30px;
+                            background: #e53935;
+                            span {
+                                color: white;
+                            }
+                        }
+                    }
+                    .diag-gen-0 {
+                        width: 18%;
+                        min-width: 70px;
+                        aspect-ratio: 1 / 1;
+                        img {
+                            width: 60%;
+                            height: 60%;
+                        }
+                    }
+                    .diag-gen-1 {
+                        width: 23%;
+                        min-width: 85px;
+                        aspect-ratio: 1 / 1;
+                        img {
+                            width: 70%;
+                            height: 70%;
+                        }
+                    }
+                    .diag-gen-2 {
+                        width: 26%;
+                        min-width: 100px;
+                        aspect-ratio: 1 / 1;
+                        img {
+                            width: 80%;
+                            height: 80%;
+                        }
+                    }
+                    .diag-gen-max {
+                        width: 50%;
+                        min-width: 110px;
+                        aspect-ratio: 1 / 1;
+                        img {
+                            width: 80%;
+                            height: 80%;
+                        }
+                    }
+                }
+            }
+
+            .diag-object-hide {
+                display: none;
+            }
+        }
+        footer.diag-bottom-bar {
+            background: #1e1e1e;
+            height: 50px;
         }
     }
 }
-
-
-
-
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.6);

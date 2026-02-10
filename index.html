@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./styles/pokebox.css">
     <link rel="stylesheet" href="./styles/dialog.css">
+    <link rel="stylesheet" href="./styles/pokebox.css">
     <link rel="stylesheet" href="./styles/animation.css">
-
     <script src="./scripts/apiFun.js" defer></script>
     <script src="./scripts/helper.js" defer></script>
     <script src="./scripts/template.js" defer></script>
@@ -89,7 +88,8 @@
                 <form onsubmit="searchButton(event)">
                     <input type="text" id="searchField" placeholder="search #number or string">
                     <button><img src="./assets/img/search.png" alt=""></button>
-                    <button disabled onsubmit="exitSearchButton(event)" id="header-render-button"><img src="./assets/img/reload.png" alt=""></button>
+                    <button disabled onsubmit="exitSearchButton(event)" id="header-render-button"><img
+                            src="./assets/img/reload.png" alt=""></button>
                 </form>
             </div>
         </div>
@@ -133,36 +133,49 @@
 
     <dialog id="diag-root">
         <div>
-            <header class="diag-top-bar">
-                <button><img src="./assets/img/close.png" alt=""></button>
-                <img src="./assets/img/logo.png" alt="">
+            <header id="diag-header" class="diag-top-bar">
+                <button onclick="closeDialogButton()" id="diag-close-button"><img src="./assets/img/close.png" alt=""></button>
+                <img id="diag-pokemon-sprite" src="./assets/img/logo.png" alt="">
+                <h2 id="diag-pokemon-name">Pokemon Name</h2>
             </header>
             <section>
-                <div class="diag-button-bar">
-                    <button>
-                        <p>Info</p>
-                    </button>
-                    <button>
-                        <p>Stats</p>
-                    </button>
-                    <button>
-                        <p>Evolution</p>
-                    </button>
-                </div>
-                <div class="diag-stats-container-info">
+                <nav class="diag-button-bar">
+                    <button onclick="prevDialogPokemonButton()"><img src="./assets/img/arrow.png" alt=""></button>
+                    <div class="diag-inner-button-bar">
+                        <button onclick="tabDialogContentButtpn(`1`)" class="diag-inner-button">
+                            <p>Info</p>
+                        </button>
+                        <button onclick="tabDialogContentButtpn(`2`)" class="diag-inner-button">
+                            <p>Stats</p>
+                        </button>
+                        <button onclick="tabDialogContentButtpn(`3`)" class="diag-inner-button">
+                            <p>Evolution</p>
+                        </button>
+                    </div>
+                    <button onclick="nextDialogPokemonButton()"><img class="mirror" class-arrowRight src="./assets/img/arrow.png" alt=""></button>
+                </nav>
+
+                <div id="diag-content-tab-1" class="diag-stats-container-info diag-content">
+                    <p><img src="./assets/img/genera.png" alt=""> <span id="diag-genera"></span></p>
+                    <p id="diag-description"></p>
+                    <div class="diag-size-bar">
+                        <p><img src="./assets/img/weight.png"  alt=""><span id="diag-weight">3</span></p>
+                        <p><span id="diag-height">5</span><img src="./assets/img/height.png"  alt=""></p>
+                    </div>
 
                 </div>
-                <div class="diag-stats-container-stats object-hide">
-
+                <div id="diag-content-tab-2" class="diag-stats-container-stats diag-content diag-object-hide">
+                    <p>penis 2</p>
                 </div>
-                <div class="diag-stats-container-evo object-hide">
-
+                <div id="diag-content-tab-3" class="diag-stats-container-evo diag-content diag-object-hide">
+                    <p><img src="./assets/img/evolution.png" alt=""> <span id="diag-evo-fam">Evolution-Familiy</span></p>
+                    <div id="diag-evo-container">  </div>
                 </div>
             </section>
-
+               
             <footer class="diag-bottom-bar">
-                <button><img src="./assets/img/arrow.png" alt=""></button>
-                <button><img class-arrowRight src="./assets/img/arrow.png" alt=""></button>
+            
+
             </footer>
         </div>
     </dialog>

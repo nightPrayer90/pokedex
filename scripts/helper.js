@@ -18,6 +18,14 @@ function toggleClass(elementID, className) {
     elementRef.classList.toggle(className);
 }
 
+function removeTypeClasses(elemet, clsString) {
+    elemet.classList.forEach((cls) => {
+        if (cls.startsWith(clsString)) {
+            elemet.classList.remove(cls);
+        }
+    });
+}
+
 function wrapTypeToSprite(type) {
     let result = "./assets/svg/favicon.png";
     for (let i = 0; i < typeSprites.length; i++) {
@@ -61,4 +69,24 @@ function generationMapper(generation) {
         default:
             return 0;
     }
+}
+
+function findSearchIndex(searchID) {
+    searchID++;
+    for (let i = 0; i < searchArray.length; i++) {
+        if (searchID === searchArray[i]) return i;
+    }
+    return -1;
+}
+
+function scrollToBox(diagIndex) {
+    const boxRef = document.getElementById("pokebox-" + diagIndex);
+    boxRef.scrollIntoView({ block: "center" });
+    markPokebox(boxRef);
+}
+
+function markPokebox(boxRef) {
+    if (lastScrollBoxRef != null) lastScrollBoxRef.classList.remove("pokebox-loaded-select");
+    boxRef.classList.add("pokebox-loaded-select");
+    lastScrollBoxRef = boxRef;
 }

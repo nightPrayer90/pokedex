@@ -16,3 +16,7 @@
     width: 100%;
     max-width: 1920px;
 }
+
+.mirror {
+    transform: scale(-1);
+}

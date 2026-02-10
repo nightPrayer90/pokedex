@@ -18,6 +18,17 @@ let loadingLanguage = "de";
 
 let searchModeFlag = false;
 let isDialogOpen = false; //maybe i dont need it
+let diagIndex = 0;
+const diagSpriteRef = document.getElementById("diag-pokemon-sprite");
+const diagNameRef = document.getElementById("diag-pokemon-name");
+const diagHeaderRef = document.getElementById("diag-header");
+const diagDescriptionRef = document.getElementById("diag-description");
+const diagWeightRef = document.getElementById("diag-weight");
+const diagHeightRef = document.getElementById("diag-height");
+const diagGeneraRef = document.getElementById("diag-genera");
+
+const diagEvoContainerRef = document.getElementById("diag-evo-container");
+let lastScrollBoxRef = null;
 //#endregion
 
 // #region init
@@ -27,6 +38,7 @@ function init() {
 }
 
 async function loadFirstPokemons() {
+    addEventKeyControls();
     showLoadingSpinner();
     await fetchTypeSprites();
     await loadPokemons(pokemons.length + 1);
@@ -52,6 +64,29 @@ async function loadPokemons(loadAt) {
     }
     hideLoadingSpinner();
 }
+
+/** add EventListeners for key controls  */
+function addEventKeyControls() {
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+            if (isDialogOpen == true) {
+                event.preventDefault();
+                prevDialogPokemonButton();
+            }
+        } else if (event.key === "ArrowRight") {
+            if (isDialogOpen == true) {
+                event.preventDefault();
+                nextDialogPokemonButton();
+            }
+        } else if (event.key === "Escape") {
+            if (isDialogOpen == true) {
+                event.preventDefault();
+                closeDialogButton();
+            }
+        }
+    });
+}
+//#endregion
 
 //#region Button Functions ------------------------------------------------------------------------
 function loadButton() {
@@ -90,18 +125,6 @@ async function searchButton(event) {
     inputFieldRef.value = "";
     closeBurgerMenu();
 }
-
-function openDialog(pokeID) {
-    diagRef.showModal();
-    isDialogOpen = true;
-}
-
-/** close the dialog */
-function btnCloseDialog() {
-    diagRef.close();
-    isDialogOpen = false;
-}
-
 //#endregion
 
 //#region Render Functions ------------------------------------------------------------------------
@@ -117,7 +140,7 @@ function renderPokeBoxLoad(pokeID, isLoading) {
         pokeboxRef.innerHTML = pokeboxContent(pokeID, generationID);
 
         renderPokeBoxType(pokeboxRef, pokeID);
-        conterRef.innerText = pokemons.length;;
+        conterRef.innerText = pokemons.length;
     }
 }
 
@@ -217,3 +240,84 @@ function hideLoadingSpinner() {
     changeClass("header-logo", "spin-animation", false);
 }
 //#endregion
+
+//#region dialog ----------------------------------------------------------------------------------
+function openDialog(pokeID) {
+    diagIndex = pokeID - 1;
+    renderDialog(diagIndex);
+
+    diagRef.showModal();
+    isDialogOpen = true;
+
+    closeBurgerMenu();
+}
+
+function closeDialogButton() {
+    diagRef.close();
+    isDialogOpen = false;
+    lastScrollBoxRef.classList.remove("pokebox-loaded-select");
+}
+
+function tabDialogContentButtpn(tab) {
+    changeClass("diag-content-tab-1", "diag-object-hide", true);
+    changeClass("diag-content-tab-2", "diag-object-hide", true);
+    changeClass("diag-content-tab-3", "diag-object-hide", true);
+    changeClass("diag-content-tab-" + tab, "diag-object-hide", false);
+}
+
+function nextDialogPokemonButton() {
+    if (!searchModeFlag) {
+        if (diagIndex >= pokemons.length - 1) diagIndex = -1;
+        diagIndex++;
+    } else {
+        index = findSearchIndex(diagIndex) + 1;
+        if (index < searchArray.length) diagIndex = searchArray[index] - 1;
+        else diagIndex = searchArray[0] - 1;
+    }
+    renderDialog();
+}
+
+function prevDialogPokemonButton() {
+    if (!searchModeFlag) {
+        if (diagIndex < 1) diagIndex = pokemons.length;
+        diagIndex--;
+    } else {
+        index = findSearchIndex(diagIndex) - 1;
+        if (index >= 0) diagIndex = searchArray[index] - 1;
+        else diagIndex = searchArray[searchArray.length - 1] - 1;
+    }
+    renderDialog();
+}
+
+function renderDialog() {
+    scrollToBox(diagIndex + 1);
+    diagSpriteRef.src = pokemons[diagIndex].sprites;
+    diagNameRef.innerText = "#" + pokemons[diagIndex].id + " - " + pokemons[diagIndex].name;
+    removeTypeClasses(diagHeaderRef, "type-");
+    changeClass("diag-header", "type-" + pokemons[diagIndex].types[0].name, true);
+
+    //tab 1
+    diagGeneraRef.innerText = pokemons[diagIndex].genera;
+    diagDescriptionRef.innerText = pokemons[diagIndex].description;
+    diagWeightRef.innerText = pokemons[diagIndex].weight;
+    diagHeightRef.innerText = pokemons[diagIndex].height;
+
+    //-> Typen
+
+    //tab 2
+
+    //tab 3
+    diagEvoContainerRef.innerHTML = "";
+    const evoLengh = Object.values(pokemons[diagIndex].evoList);
+    for (const evo of evoLengh) {
+        let evoClass = (evoLengh.length > 1) ? evo.gen : "max";
+        evoClass = (evoLengh.length == 2) ? evo.gen+1 : evoClass;
+        diagEvoContainerRef.innerHTML += /*html*/ `
+            <div class="diag-gen-${evoClass}">
+                <img src="${evo.sprite}" alt="">
+                <div><span>${+evo.gen+1}</span></div>
+            </div>
+            `;
+    }
+}
+//endregion

@@ -10,6 +10,10 @@
     src: url("../assets/fonts/Lato/Lato-Regular.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "Lato-Bold";
+    src: url("../assets/fonts/Lato/Lato-Bold.ttf") format("truetype");
+}
 
 h1 {
     font-family: "Iner-Var";

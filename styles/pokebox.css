@@ -65,6 +65,12 @@
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
 }
 
+
+.pokebox-loaded-select  {
+    border: red solid 4px;;
+}
+
+
 .pokebox-placeholder {
     border-radius: 18px;
     background: linear-gradient(90deg, #6f6f6f 0%, #989898 40%, #6f6f6f 100%);
@@ -95,67 +101,67 @@
 }
 
 .type-normal {
-    background: linear-gradient(to bottom, #e2e1c9 0%, #cbcaba 100%);
+    background: linear-gradient(to bottom, #e2e1c9 0%, #cecdc2 100%);
 }
 .type-fire {
-    background: linear-gradient(to bottom, #ee8130 0%, #d5742b 100%);
+    background: linear-gradient(to bottom, #ee8130 0%, #d37c39 100%);
 }
 .type-water {
-    background: linear-gradient(to bottom, #4577e5 0%, #3e6bce 100%);
+    background: linear-gradient(to bottom, #4577e5 0%, #4c75ce 100%);
 }
 .type-electric {
-    background: linear-gradient(to bottom, #e2bd27 0%, #cba923 100%);
+    background: linear-gradient(to bottom, #e2bd27 0%, #cbad33 100%);
 }
 .type-grass {
-    background: linear-gradient(to bottom, #6ec53b 0%, #63b134 100%);
+    background: linear-gradient(to bottom, #6ec53b 0%, #6baf41 100%);
 }
 .type-ice {
-    background: linear-gradient(to bottom, #96d9d6 0%, #87c3c1 100%);
+    background: linear-gradient(to bottom, #96d9d6 0%, #92c3c2 100%);
 }
 .type-fighting {
-    background: linear-gradient(to bottom, #e23b35 0%, #cb352f 100%);
+    background: linear-gradient(to bottom, #e23b35 0%, #cc433e 100%);
 }
 .type-poison {
-    background: linear-gradient(to bottom, #a250a1 0%, #924891 100%);
+    background: linear-gradient(to bottom, #a250a1 0%, #8e518d 100%);
 }
 .type-ground {
-    background: linear-gradient(to bottom, #e2bf65 0%, #cbae5b 100%);
+    background: linear-gradient(to bottom, #e2bf65 0%, #c6ad68 100%);
 }
 .type-flying {
-    background: linear-gradient(to bottom, #9797e9 0%, #8888d2 100%);
+    background: linear-gradient(to bottom, #9797e9 0%, #9494d0 100%);
 }
 .type-psychic {
-    background: linear-gradient(to bottom, #f95587 0%, #e04c7a 100%);
+    background: linear-gradient(to bottom, #f95587 0%, #da5b83 100%);
 }
 .type-bug {
-    background: linear-gradient(to bottom, #93a417 0%, #849414 100%);
+    background: linear-gradient(to bottom, #93a417 0%, #819020 100%);
 }
 .type-rock {
-    background: linear-gradient(to bottom, #817a53 0%, #746e4b 100%);
+    background: linear-gradient(to bottom, #817a53 0%, #757159 100%);
 }
 .type-ghost {
-    background: linear-gradient(to bottom, #735797 0%, #684f88 100%);
+    background: linear-gradient(to bottom, #735797 0%, #705e86 100%);
 }
 .type-dragon {
-    background: linear-gradient(to bottom, #6f35fc 0%, #6430e3 100%);
+    background: linear-gradient(to bottom, #6f35fc 0%, #7c51ea 100%);
 }
 .type-dark {
-    background: linear-gradient(to bottom, #3b2e25 0%, #352920 100%);
+    background: linear-gradient(to bottom, #3b2e25 0%, #3d342d 100%);
 }
 .type-steel {
-    background: linear-gradient(to bottom, #b8d7ca 0%, #a6c2b6 100%);
+    background: linear-gradient(to bottom, #b8d7ca 0%, #aec3ba 100%);
 }
 .type-fairy {
-    background: linear-gradient(to bottom, #d685ad 0%, #c1789c 100%);
+    background: linear-gradient(to bottom, #d685ad 0%, #be82a0 100%);
 }
 .type-unknown {
-    background: linear-gradient(to bottom, #68a090 0%, #5e9082 100%);
+    background: linear-gradient(to bottom, #68a090 0%, #699085 100%);
 }
 .type-shadow {
-    background: linear-gradient(to bottom, #3b2b4a 0%, #352643 100%);
+    background: linear-gradient(to bottom, #3b2b4a 0%, #382b44 100%);
 }
 .type-stellar {
-    background: linear-gradient(to bottom, #8fd3ff 0%, #81bfe6 100%);
+    background: linear-gradient(to bottom, #8fd3ff 0%, #92c5e4 100%);
 }
 
 .hide-object {
