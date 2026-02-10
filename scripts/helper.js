@@ -30,7 +30,6 @@ function isSearchInString(lookUpString, searchString) {
     return lookUpString.toLowerCase().includes(searchString.toLowerCase());
 }
 
-// eigentlich können wir hier den searchmodeFlag auch raus refactorn
 function searchMode(isSearchMode, inputPlaceholder) {
     searchModeFlag = isSearchMode;
     const logoRef = document.getElementById("header-logo");
@@ -45,4 +44,29 @@ function searchMode(isSearchMode, inputPlaceholder) {
 function resetLoadingArea() {
     const renderAreaRef = document.getElementById("pokemon-loading-area");
     renderAreaRef.innerHTML = "";
+}
+
+function generationMapper(generation) {
+    switch (generation) {
+        case "generation-i":
+            return 1;
+        case "generation-ii":
+            return 2;
+        case "generation-iii":
+            return 3;
+        case "generation-iv":
+            return 4;
+        case "generation-v":
+            return 5;
+        case "generation-vi":
+            return 6;
+        case "generation-vii":
+            return 7;
+        case "generation-viii":
+            return 8;
+        case "generation-ix":
+            return 9;
+        default:
+            return 0;
+    }
 }

@@ -63,6 +63,7 @@ async function searchButton(event) {
 
     const inputFieldRef = document.getElementById("searchField");
     buildSearchArray(inputFieldRef.value);
+    renderSearchArray();
 
     if (inputFieldRef.value != "") {
         inputFieldRef.placeholder = inputFieldRef.value;
@@ -86,7 +87,8 @@ function renderPokeBoxLoad(pokeID, isLoading) {
         changeClass("pokebox-" + pokeID, "pokebox-loaded", true);
 
         const pokeboxRef = document.getElementById("pokebox-" + pokeID);
-        pokeboxRef.innerHTML = pokeboxContent(pokeID);
+        const generationID = generationMapper(pokemons[pokeID - 1].generation);
+        pokeboxRef.innerHTML = pokeboxContent(pokeID,generationID);
 
         renderPokeBoxType(pokeboxRef, pokeID);
         renderLoadCounter();
@@ -123,6 +125,19 @@ function renderLoadedPokemon() {
     }
 }
 
+function buildSearchArray(searchString) {
+    searchArray.length = 0;
+
+    for (let i = 0; i < pokemons.length; i++) {
+        if (isSearchInString(pokemons[i].loolupName, searchString)) {
+            let pokeID = pokemons[i].id;
+            if (pokeID > 1025) pokeID = pokemons[i].id - 8975;
+
+            searchArray.push(pokeID);
+        }
+    }
+}
+
 /** Hide every rendered box, and then unhide all boxes form search array - it is much faster if i render all new */
 function renderSearchArray() {
     for (let i = 1; i <= pokemons.length; i++) {
@@ -135,28 +150,6 @@ function renderSearchArray() {
 
     // TODO: DO Anything if we dont find a pokemon
 }
-
-//#endregion
-
-//#region searchFunction --------------------------------------------------------------------------
-
-// das search array ist eigentlich überflüssig auf diese art und weise?
-function buildSearchArray(searchString) {
-    searchArray.length = 0;
-
-    //resetLoadingArea();
-
-    for (let i = 0; i < pokemons.length; i++) {
-        if (isSearchInString(pokemons[i].loolupName, searchString)) {
-            let pokeID = pokemons[i].id;
-            if (pokeID > 1025) pokeID = pokemons[i].id - 8975;
-
-            searchArray.push(pokeID);
-        }
-    }
-
-    renderSearchArray();
-}
 //#endregion
 
 // #region Settings - burger menus ----------------------------------------------------------------
@@ -165,7 +158,6 @@ function toggleBurger(menu) {
     else changeClass("burger-menu-quantity", "open", false);
     toggleClass(menu, "open");
 }
-
 
 function chooseBurgerLanguage(language) {
     loadingLanguage = language;
