@@ -1,0 +1,16 @@
+#diag-root {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: #09212a;
+    border-radius: 16px;
+    border: none;
+    color: white;
+    width: 688px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}

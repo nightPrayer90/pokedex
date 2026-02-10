@@ -8,6 +8,7 @@ const lastPokemonIndex = 1325;
 let loadingLanguage = "de";
 let searchModeFlag = false;
 const inputFieldPlaceholder = "search #number or string";
+let = isDialogOpen=false; //maybe i dont need it
 //#endregion
 
 // #region init
@@ -75,6 +76,22 @@ async function searchButton(event) {
     inputFieldRef.value = "";
     closeBurgerMenu();
 }
+
+function openDialog(pokeID) {
+    let diagRef = document.getElementById("diag-root");
+    
+    diagRef.showModal();
+    isDialogOpen = true;
+}
+
+/** close the dialog */
+function btnCloseDialog() {
+    let diagRef = document.getElementById("diag-root");
+    diagRef.close();
+    isDialogOpen = false;
+}
+
+
 //#endregion
 
 //#region Render Functions ------------------------------------------------------------------------
