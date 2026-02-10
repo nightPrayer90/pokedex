@@ -32,18 +32,10 @@ function isSearchInString(lookUpString, searchString) {
 
 function searchMode(isSearchMode, inputPlaceholder) {
     searchModeFlag = isSearchMode;
-    const logoRef = document.getElementById("header-logo");
+    reloadRef.disabled = !isSearchMode;
     logoRef.src = searchModeFlag ? "./assets/img/logo-search.png" : "./assets/img/logo.png";
-
     isSearchMode ? document.body.classList.add("body-search-color") : document.body.classList.remove("body-search-color");
-
-    const inputFieldRef = document.getElementById("searchField");
     inputFieldRef.placeholder = inputPlaceholder;
-}
-
-function resetLoadingArea() {
-    const renderAreaRef = document.getElementById("pokemon-loading-area");
-    renderAreaRef.innerHTML = "";
 }
 
 function generationMapper(generation) {

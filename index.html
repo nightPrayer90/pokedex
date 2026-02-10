@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/pokebox.css">
-     <link rel="stylesheet" href="./styles/dialog.css">
+    <link rel="stylesheet" href="./styles/dialog.css">
     <link rel="stylesheet" href="./styles/animation.css">
 
     <script src="./scripts/apiFun.js" defer></script>
@@ -89,6 +89,7 @@
                 <form onsubmit="searchButton(event)">
                     <input type="text" id="searchField" placeholder="search #number or string">
                     <button><img src="./assets/img/search.png" alt=""></button>
+                    <button disabled onsubmit="exitSearchButton(event)" id="header-render-button"><img src="./assets/img/reload.png" alt=""></button>
                 </form>
             </div>
         </div>
@@ -131,22 +132,40 @@
     </div>
 
     <dialog id="diag-root">
-            <div>
-                <header class="diag-top-bar">
-                    <button><img src="./assets/img/close.png" alt=""></button>
-                    <img src="./assets/img/logo.png" alt="">
-                </header>
+        <div>
+            <header class="diag-top-bar">
+                <button><img src="./assets/img/close.png" alt=""></button>
+                <img src="./assets/img/logo.png" alt="">
+            </header>
+            <section>
+                <div class="diag-button-bar">
+                    <button>
+                        <p>Info</p>
+                    </button>
+                    <button>
+                        <p>Stats</p>
+                    </button>
+                    <button>
+                        <p>Evolution</p>
+                    </button>
+                </div>
+                <div class="diag-stats-container-info">
 
-                <section>
-    
-                </section>
+                </div>
+                <div class="diag-stats-container-stats object-hide">
 
-                <footer class="diag-bottom-bar">
-                    <button><img src="./assets/img/arrow.png" alt=""></button>
-                    <button><img class-arrowRight src="./assets/img/arrow.png" alt=""></button>
-                </footer>
-            </div>
-        </dialog>
+                </div>
+                <div class="diag-stats-container-evo object-hide">
+
+                </div>
+            </section>
+
+            <footer class="diag-bottom-bar">
+                <button><img src="./assets/img/arrow.png" alt=""></button>
+                <button><img class-arrowRight src="./assets/img/arrow.png" alt=""></button>
+            </footer>
+        </div>
+    </dialog>
 </body>
 
 </html>

@@ -45,6 +45,11 @@ button:hover {
     transform: scale(1.07);
 }
 
+button:disabled {
+    transform: none;
+    background-color: #b38181;
+}
+
 .button-text {
     border: solid 2px #ffd600;
     min-width: auto;

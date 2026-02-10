@@ -1,14 +1,23 @@
 // #region global fields
+const logoRef = document.getElementById("header-logo");
+const reloadRef = document.getElementById("header-render-button");
+const inputFieldRef = document.getElementById("searchField");
+const renderAreaRef = document.getElementById("pokemon-loading-area");
+const diagRef = document.getElementById("diag-root");
+const conterRef = document.getElementById("header-loaded-pokemon");
+
 const pokemons = [];
 const typeSprites = [];
 const searchArray = [];
 
-let maxLoadPokemonQuanitiy = 15;
 const lastPokemonIndex = 1325;
-let loadingLanguage = "de";
-let searchModeFlag = false;
 const inputFieldPlaceholder = "search #number or string";
-let = isDialogOpen=false; //maybe i dont need it
+
+let maxLoadPokemonQuanitiy = 15;
+let loadingLanguage = "de";
+
+let searchModeFlag = false;
+let isDialogOpen = false; //maybe i dont need it
 //#endregion
 
 // #region init
@@ -46,9 +55,6 @@ async function loadPokemons(loadAt) {
 
 //#region Button Functions ------------------------------------------------------------------------
 function loadButton() {
-    const buttonDivRef = document.getElementById("pokebox-load-more");
-    if (buttonDivRef != null) buttonDivRef.remove();
-
     if (searchModeFlag) {
         showLoadingSpinner();
         searchMode(false, inputFieldPlaceholder);
@@ -59,10 +65,18 @@ function loadButton() {
     closeBurgerMenu();
 }
 
+function exitSearchButton(event) {
+    console.log("klick");
+    event.preventDefault();
+    searchMode(false, inputFieldPlaceholder);
+    renderLoadedPokemon();
+
+    closeBurgerMenu();
+}
+
 async function searchButton(event) {
     event.preventDefault();
 
-    const inputFieldRef = document.getElementById("searchField");
     buildSearchArray(inputFieldRef.value);
     renderSearchArray();
 
@@ -78,26 +92,21 @@ async function searchButton(event) {
 }
 
 function openDialog(pokeID) {
-    let diagRef = document.getElementById("diag-root");
-    
     diagRef.showModal();
     isDialogOpen = true;
 }
 
 /** close the dialog */
 function btnCloseDialog() {
-    let diagRef = document.getElementById("diag-root");
     diagRef.close();
     isDialogOpen = false;
 }
-
 
 //#endregion
 
 //#region Render Functions ------------------------------------------------------------------------
 function renderPokeBoxLoad(pokeID, isLoading) {
     if (isLoading == true) {
-        const renderAreaRef = document.getElementById("pokemon-loading-area");
         renderAreaRef.innerHTML += pokeboxTemplate(pokeID);
     } else {
         changeClass("pokebox-" + pokeID, "pokebox-placeholder", false);
@@ -105,10 +114,10 @@ function renderPokeBoxLoad(pokeID, isLoading) {
 
         const pokeboxRef = document.getElementById("pokebox-" + pokeID);
         const generationID = generationMapper(pokemons[pokeID - 1].generation);
-        pokeboxRef.innerHTML = pokeboxContent(pokeID,generationID);
+        pokeboxRef.innerHTML = pokeboxContent(pokeID, generationID);
 
         renderPokeBoxType(pokeboxRef, pokeID);
-        renderLoadCounter();
+        conterRef.innerText = pokemons.length;;
     }
 }
 
@@ -129,11 +138,6 @@ function renderPokeBoxType(pokeboxRef, pokeID) {
     if (pokemons[pokeID - 1].types.length == 2) {
         changeClass("pokebox-type-" + pokeID, "type-" + pokemons[pokeID - 1].types[1].name, true);
     }
-}
-
-function renderLoadCounter() {
-    const conterRef = document.getElementById("header-loaded-pokemon");
-    conterRef.innerText = pokemons.length;
 }
 
 function renderLoadedPokemon() {
@@ -184,7 +188,8 @@ function chooseBurgerLanguage(language) {
 
     pokemons.length = 0;
     searchMode(false, inputFieldPlaceholder);
-    resetLoadingArea();
+
+    renderAreaRef.innerHTML = "";
     loadPokemons(pokemons.length + 1);
 }
 

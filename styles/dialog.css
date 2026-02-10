@@ -9,7 +9,24 @@
     border: none;
     color: white;
     width: 688px;
+
+    div {
+        header {
+
+        }
+        section {
+            background: white
+
+        }
+        footer {
+            background: white;
+        }
+    }
 }
+
+
+
+
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
