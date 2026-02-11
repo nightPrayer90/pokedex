@@ -3,7 +3,7 @@ const logoRef = document.getElementById("header-logo");
 const reloadRef = document.getElementById("header-render-button");
 const inputFieldRef = document.getElementById("searchField");
 const renderAreaRef = document.getElementById("pokemon-loading-area");
-const diagRef = document.getElementById("diag-root");
+const sloganRef = document.getElementById("pokemon-slogan");
 const conterRef = document.getElementById("header-loaded-pokemon");
 const languageRef = document.getElementById("language-setting");
 const quantityRef = document.getElementById("quantity-setting");
@@ -14,6 +14,8 @@ const searchArray = [];
 
 const lastPokemonIndex = 1325;
 const inputFieldPlaceholder = "search #number or string";
+const sloganString = "catch them all!";
+const searchEmptyString = "Nichts gefunden :("
 
 let maxLoadPokemonQuanitiy = 15;
 let loadingLanguage = "de";
@@ -22,6 +24,8 @@ let searchModeFlag = false;
 let isDialogOpen = false;
 let diagIndex;
 let lastScrollBoxRef = null;
+
+const diagRef = document.getElementById("diag-root");
 
 // diag tab 1
 const diagSpriteRef = document.getElementById("diag-pokemon-sprite");
@@ -225,11 +229,11 @@ function renderSearchArray() {
         changeClass("pokebox-" + [searchArray[i]], "hide-object", false);
     }
 
-    // TODO: DO Anything if we dont find a pokemon
+    sloganRef.innerText = (searchArray.length != 0) ? sloganString :searchEmptyString;
 }
 //#endregion
 
-// #region Settings - burger menus ----------------------------------------------------------------
+// #region Settings - Burger Menu -----------------------------------------------------------------
 function toggleBurger(menu) {
     if (menu == "burger-menu-quantity") changeClass("burger-menu-language", "open", false);
     else changeClass("burger-menu-quantity", "open", false);

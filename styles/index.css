@@ -142,12 +142,11 @@ footer {
         font-size: 18px;
         text-align: center;
     }
-
     a {
-     color: #ffd600;   
+        color: #ffd600;   
     }
     a:hover {
-     color: #e53935;   
+        color: #e53935;   
     }
 }
 

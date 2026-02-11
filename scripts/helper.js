@@ -68,7 +68,6 @@ function isSearchInString(lookUpString, searchString) {
  * @param {string} inputPlaceholder 
  */
 function searchMode(isSearchMode, inputPlaceholder) {
-
     searchModeFlag = isSearchMode;
 
     reloadRef.disabled = !isSearchMode;
