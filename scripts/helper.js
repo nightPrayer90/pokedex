@@ -68,11 +68,15 @@ function isSearchInString(lookUpString, searchString) {
  * @param {string} inputPlaceholder 
  */
 function searchMode(isSearchMode, inputPlaceholder) {
+
     searchModeFlag = isSearchMode;
+
     reloadRef.disabled = !isSearchMode;
     logoRef.src = searchModeFlag ? "./assets/img/logo-search.png" : "./assets/img/logo.png";
     isSearchMode ? document.body.classList.add("body-search-color") : document.body.classList.remove("body-search-color");
-    inputFieldRef.placeholder = inputPlaceholder;
+    
+    inputFieldRef.value = "";
+    inputFieldRef.placeholder = inputPlaceholder;  
 }
 
 /** 

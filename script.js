@@ -1,10 +1,12 @@
-// #region global fields
+// #region Global Fields --------------------------------------------------------------------------
 const logoRef = document.getElementById("header-logo");
 const reloadRef = document.getElementById("header-render-button");
 const inputFieldRef = document.getElementById("searchField");
 const renderAreaRef = document.getElementById("pokemon-loading-area");
 const diagRef = document.getElementById("diag-root");
 const conterRef = document.getElementById("header-loaded-pokemon");
+const languageRef = document.getElementById("language-setting");
+const quantityRef = document.getElementById("quantity-setting");
 
 const pokemons = [];
 const typeSprites = [];
@@ -17,8 +19,8 @@ let maxLoadPokemonQuanitiy = 15;
 let loadingLanguage = "de";
 
 let searchModeFlag = false;
-let isDialogOpen = false; //maybe i dont need it
-let diagIndex = 0;
+let isDialogOpen = false;
+let diagIndex;
 let lastScrollBoxRef = null;
 
 // diag tab 1
@@ -59,39 +61,12 @@ const diagEvoContainerRef = document.getElementById("diag-evo-container");
 const diagGenerationRef = document.getElementById("diag-generation");
 //#endregion
 
-// #region init
+// #region init -----------------------------------------------------------------------------------
 /** Initializes the event listeners for selecting images in the dialog using the arrow keys.*/
 function init() {
-    loadFirstPokemons();
-}
-
-async function loadFirstPokemons() {
     addEventKeyControls();
     addEventCloseBackdropClick();
-    showLoadingSpinner();
-    await fetchTypeSprites();
-    await loadPokemons(pokemons.length + 1);
-
-    console.log(pokemons[0]);
-}
-
-async function loadPokemons(loadAt) {
-    const loadUntil = Math.min(lastPokemonIndex, pokemons.length + maxLoadPokemonQuanitiy);
-    showLoadingSpinner();
-
-    // render empty preload boxes
-    for (let i = loadAt; i <= loadUntil; i++) {
-        renderPokeBoxLoad(i, true);
-    }
-
-    // fill the boxes
-    for (let i = loadAt; i <= loadUntil; i++) {
-        let pokemon = await getPokemon(i);
-        pokemons.push(pokemon);
-
-        renderPokeBoxLoad(i, false);
-    }
-    hideLoadingSpinner();
+    loadFirstPokemons();
 }
 
 /** add EventListeners for key controls  */
@@ -116,7 +91,7 @@ function addEventKeyControls() {
     });
 }
 
-/**logic for backdrop close */
+/** logic for backdrop close */
 function addEventCloseBackdropClick() {
     //
     const dialog = document.getElementById("diag-root");
@@ -127,50 +102,81 @@ function addEventCloseBackdropClick() {
     });
 }
 
+async function loadFirstPokemons() {
+    showLoadingSpinner();
+    await fetchTypeSprites();
+    await loadPokemons();
+}
 //#endregion
 
-//#region Button Functions ------------------------------------------------------------------------
+// #region button functions -----------------------------------------------------------------------
 function loadButton() {
+    closeBurgerMenus();
+
     if (searchModeFlag) {
         showLoadingSpinner();
         searchMode(false, inputFieldPlaceholder);
         renderLoadedPokemon();
     }
-    loadPokemons(pokemons.length + 1);
-
-    closeBurgerMenu();
+    loadPokemons();
 }
 
-function exitSearchButton(event) {
-    console.log("klick");
-    event.preventDefault();
+function exitSearchButton() {
+    closeBurgerMenus();
+
     searchMode(false, inputFieldPlaceholder);
     renderLoadedPokemon();
-
-    closeBurgerMenu();
 }
 
-async function searchButton(event) {
+function searchButton(event) {
     event.preventDefault();
+    closeBurgerMenus();
+
+    if (inputFieldRef.value.length < 3) return;
 
     buildSearchArray(inputFieldRef.value);
     renderSearchArray();
-
-    if (inputFieldRef.value != "") {
-        inputFieldRef.placeholder = inputFieldRef.value;
-        searchMode(true, "[" + +searchArray.length + "] - " + inputFieldRef.value);
-    } else {
-        searchMode(false, inputFieldPlaceholder);
-    }
-
-    inputFieldRef.value = "";
-    closeBurgerMenu();
+    searchMode(true, "[" + +searchArray.length + "] - " + inputFieldRef.value);
 }
 //#endregion
 
-//#region Render Functions ------------------------------------------------------------------------
-function renderPokeBoxLoad(pokeID, isLoading) {
-    if (isLoading == true) {
+// #region Array Functions ------------------------------------------------------------------------
+async function loadPokemons() {
+    const loadUntil = Math.min(lastPokemonIndex, pokemons.length + maxLoadPokemonQuanitiy);
+    showLoadingSpinner();
+
+    // render empty preload boxes
+    for (let i = pokemons.length + 1; i <= loadUntil; i++) {
+        renderPokeBox(i, true);
+    }
+
+    // fill the boxes
+    for (let i = pokemons.length + 1; i <= loadUntil; i++) {
+        let pokemon = await getPokemon(i);
+        pokemons.push(pokemon);
+
+        renderPokeBox(i, false);
+    }
+    hideLoadingSpinner();
+}
+
+function buildSearchArray(searchString) {
+    searchArray.length = 0;
+
+    for (let i = 0; i < pokemons.length; i++) {
+        if (isSearchInString(pokemons[i].loolupName, searchString)) {
+            let pokeID = pokemons[i].id;
+            if (pokeID > 1025) pokeID = pokemons[i].id - 8975;
+
+            searchArray.push(pokeID);
+        }
+    }
+}
+//#endregion
+
+// #region Render Functions -----------------------------------------------------------------------
+function renderPokeBox(pokeID, isLoading) {
+    if (isLoading) {
         renderAreaRef.innerHTML += pokeboxTemplate(pokeID);
     } else {
         changeClass("pokebox-" + pokeID, "pokebox-placeholder", false);
@@ -189,9 +195,8 @@ function renderPokeBoxType(pokeboxRef, pokeID) {
     // box bk color
     changeClass("pokebox-" + pokeID, "type-" + pokemons[pokeID - 1].types[0].name, true);
 
-    let htmlString = "";
-    // render type - images
-    htmlString = `<div id="pokebox-type-${pokeID}" class="pokekebox-loaded-types">`;
+    // area for type sprites
+    let htmlString = `<div id="pokebox-type-${pokeID}" class="pokekebox-loaded-types">`;
     for (let i = 0; i < pokemons[pokeID - 1].types.length; i++) {
         const spriteUrl = wrapTypeToSprite(pokemons[pokeID - 1].types[i].name);
         htmlString += pokeboxTypeImage(spriteUrl);
@@ -207,19 +212,6 @@ function renderPokeBoxType(pokeboxRef, pokeID) {
 function renderLoadedPokemon() {
     for (let i = 1; i <= pokemons.length; i++) {
         changeClass("pokebox-" + [i], "hide-object", false);
-    }
-}
-
-function buildSearchArray(searchString) {
-    searchArray.length = 0;
-
-    for (let i = 0; i < pokemons.length; i++) {
-        if (isSearchInString(pokemons[i].loolupName, searchString)) {
-            let pokeID = pokemons[i].id;
-            if (pokeID > 1025) pokeID = pokemons[i].id - 8975;
-
-            searchArray.push(pokeID);
-        }
     }
 }
 
@@ -245,32 +237,30 @@ function toggleBurger(menu) {
 }
 
 function chooseBurgerLanguage(language) {
+    closeBurgerMenus();
     loadingLanguage = language;
-    closeBurgerMenu();
-    const textRef = document.getElementById("language-setting");
-    textRef.innerText = language;
+    languageRef.innerText = language;
 
     pokemons.length = 0;
     searchMode(false, inputFieldPlaceholder);
 
     renderAreaRef.innerHTML = "";
-    loadPokemons(pokemons.length + 1);
+    loadPokemons();
 }
 
 function chooseBurgerQuantity(quantity) {
+    closeBurgerMenus();
     maxLoadPokemonQuanitiy = quantity;
-    closeBurgerMenu();
-    const textRef = document.getElementById("quantity-setting");
-    textRef.innerText = quantity;
+    quantityRef.innerText = quantity;
 }
 
-function closeBurgerMenu() {
+function closeBurgerMenus() {
     changeClass("burger-menu-language", "open", false);
     changeClass("burger-menu-quantity", "open", false);
 }
 //#endregion
 
-//#region loading Spinner -------------------------------------------------------------------------
+// #region loading Spinner ------------------------------------------------------------------------
 function showLoadingSpinner() {
     changeClass("loader-container", "hide-object", false);
     changeClass("header-logo", "spin-animation", true);
@@ -281,4 +271,3 @@ function hideLoadingSpinner() {
     changeClass("header-logo", "spin-animation", false);
 }
 //#endregion
-
