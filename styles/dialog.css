@@ -10,13 +10,12 @@
     color: white;
     width: 500px;
     min-width: 300px;
-    min-height: 655px;
+
 
     div {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background-color: white;
 
         header.diag-top-bar {
             display: flex;
@@ -62,8 +61,6 @@
             background: white;
             flex: 1;
 
-            
-
             .diag-button-bar {
                 display: flex;
                 flex-direction: row;
@@ -106,7 +103,7 @@
                 p,
                 span {
                     font-family: "Lato-Regular";
-                    font-size: 20px;
+                    font-size: clamp(18px, 5dvw ,20px);
                     color: #1e1e1e;
                 }
 
@@ -119,16 +116,42 @@
             }
 
             #diag-content-tab-1 {
+                #diag-genera {
+                    font-family: "Lato-Bold";
+
+                }
+
+                #diag-description {
+                    margin-top: 24px;
+                    flex:3;
+                }
+
+                #diag-type-bar {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: left;
+                    align-items: flex-end;
+                    gap: 10px;
+                    height: 80px;
+                    border-top: #09212a80 solid 1px;
+                    border-bottom: #09212a87 solid 1px;
+                
+                    img {
+                        width: 130px;
+                        object-fit: contain;
+                        height: 35px;
+                        margin: 24px 0;
+                        
+                    }
+                    
+                }
+
                 .diag-size-bar {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
                     width: 100%;
-                }
-
-                #diag-genera {
-                    font-family: "Lato-Bold";
                 }
             }
 
@@ -218,6 +241,7 @@
             }
             
         }
+        
         footer.diag-bottom-bar {
             background: #1e1e1e;
             height: 50px;

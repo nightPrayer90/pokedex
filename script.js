@@ -26,6 +26,7 @@ const diagDescriptionRef = document.getElementById("diag-description");
 const diagWeightRef = document.getElementById("diag-weight");
 const diagHeightRef = document.getElementById("diag-height");
 const diagGeneraRef = document.getElementById("diag-genera");
+const diagTypeBarRef = document.getElementById("diag-type-bar");
 
 const diagEvoContainerRef = document.getElementById("diag-evo-container");
 let lastScrollBoxRef = null;
@@ -301,9 +302,13 @@ function renderDialog() {
     diagDescriptionRef.innerText = pokemons[diagIndex].description;
     diagWeightRef.innerText = pokemons[diagIndex].weight;
     diagHeightRef.innerText = pokemons[diagIndex].height;
-
-    //-> Typen
-
+    
+    // types
+    let htmlString = `<img src="${wrapTypeToSprite(pokemons[diagIndex].types[0].name)}" alt=""></img>`;
+    if (pokemons[diagIndex].types.length > 1)
+        htmlString += `<img src="${wrapTypeToSprite(pokemons[diagIndex].types[1].name)}" alt=""></img>`;
+    diagTypeBarRef.innerHTML = htmlString;
+    
     //tab 2
 
     //tab 3
