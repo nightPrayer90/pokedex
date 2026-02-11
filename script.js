@@ -121,6 +121,7 @@ function loadButton() {
         showLoadingSpinner();
         searchMode(false, inputFieldPlaceholder);
         renderLoadedPokemon();
+        console.log("Macht es das?")
     }
     loadPokemons();
 }
@@ -149,13 +150,9 @@ async function loadPokemons() {
     const loadUntil = Math.min(lastPokemonIndex, pokemons.length + maxLoadPokemonQuanitiy);
     showLoadingSpinner();
 
-    // render empty preload boxes
-    for (let i = pokemons.length + 1; i <= loadUntil; i++) {
-        renderPokeBox(i, true);
-    }
-
     // fill the boxes
     for (let i = pokemons.length + 1; i <= loadUntil; i++) {
+        renderPokeBox(i, true);
         let pokemon = await getPokemon(i);
         pokemons.push(pokemon);
 

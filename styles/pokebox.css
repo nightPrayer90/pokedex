@@ -6,9 +6,7 @@
 }
 
 .pokebox-loaded {
-    animation: popIn 0.1s ease-out 1 forwards;
     cursor: pointer;
-
     display: flex;
     align-items: center;
     flex-direction: column;
