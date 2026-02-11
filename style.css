@@ -62,7 +62,7 @@ button:disabled {
 input {
     border-radius: 10px 0 0 10px;
     border: none;
-    min-width: 220px;
+    min-width: 180px;
     color: #1e1e1e;
     padding: 15px;
 

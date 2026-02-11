@@ -11,7 +11,6 @@
     width: 500px;
     min-width: 300px;
 
-
     div {
         display: flex;
         flex-direction: column;
@@ -103,7 +102,7 @@
                 p,
                 span {
                     font-family: "Lato-Regular";
-                    font-size: clamp(18px, 5dvw ,20px);
+                    font-size: clamp(18px, 5dvw, 20px);
                     color: #1e1e1e;
                 }
 
@@ -113,17 +112,16 @@
                     height: 30px;
                     margin-right: 8px;
                 }
+
+                .diag-content-subheader {
+                    font-family: "Lato-Bold";
+                }
             }
 
             #diag-content-tab-1 {
-                #diag-genera {
-                    font-family: "Lato-Bold";
-
-                }
-
                 #diag-description {
                     margin-top: 24px;
-                    flex:3;
+                    flex: 3;
                 }
 
                 #diag-type-bar {
@@ -135,15 +133,13 @@
                     height: 80px;
                     border-top: #09212a80 solid 1px;
                     border-bottom: #09212a87 solid 1px;
-                
+
                     img {
                         width: 130px;
                         object-fit: contain;
                         height: 35px;
                         margin: 24px 0;
-                        
                     }
-                    
                 }
 
                 .diag-size-bar {
@@ -152,14 +148,13 @@
                     justify-content: space-between;
                     align-items: center;
                     width: 100%;
+                    margin-bottom: 6px;
                 }
             }
 
             #diag-content-tab-3 {
                 padding-bottom: 0;
-                #diag-evo-fam {
-                    font-family: "Lato-Bold";
-                }
+
                 #diag-evo-container {
                     display: flex;
                     align-self: center;
@@ -239,12 +234,71 @@
             .diag-object-hide {
                 display: none;
             }
-            
         }
-        
+
         footer.diag-bottom-bar {
             background: #1e1e1e;
             height: 50px;
+
+            p, span {
+                font-family: "Lato-Bold";
+                font-size: 18px;
+                color: #ffd600;
+            }
+        }
+    }
+}
+
+#diag-table-container {
+    margin-top: 20px;
+    height: 100%;
+    #diag-table {
+        tr {
+            td {
+                color: #1e1e1e;
+                font-size: clamp(18px, 5dvw, 20px);
+                padding: 6px;
+
+                .diag-statsbar-color {
+                    height: 12px;
+                    top: -1 px;
+                    border-radius: 4px;
+                }
+                #diag-statsbar-HP {
+                    background: #6bcf19;
+                }
+                #diag-statsbar-ATK {
+                    background: #e82522;
+                }
+                #diag-statsbar-DEF {
+                    background: #2c87dd;
+                }
+                #diag-statsbar-SATK {
+                    background: rgb(255, 0, 149);
+                }
+                #diag-statsbar-SDEF {
+                    background: #2f2cdd;
+                }
+                #diag-statsbar-SPD {
+                    background: #f07808;
+                }
+            }
+
+            .diag-statsbar {
+                background: linear-gradient(to bottom, #09212a00 30%, #3b424493 50%, #09212a00 70%);
+            }
+
+            td:nth-child(1) {
+                width: 40px;
+            }
+            td:nth-child(2) {
+                min-width: 100px;
+                padding: 0;
+            }
+            td:nth-child(3) {
+                width: 50px;
+                text-align: right;
+            }
         }
     }
 }

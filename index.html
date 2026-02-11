@@ -17,6 +17,7 @@
     <script src="./scripts/apiFun.js" defer></script>
     <script src="./scripts/helper.js" defer></script>
     <script src="./scripts/template.js" defer></script>
+    <script src="./scripts/dialog.js" defer></script>
     <script src="./script.js" defer></script>
 
 </head>
@@ -134,7 +135,8 @@
     <dialog id="diag-root">
         <div>
             <header id="diag-header" class="diag-top-bar">
-                <button onclick="closeDialogButton()" id="diag-close-button"><img src="./assets/img/close.png" alt=""></button>
+                <button onclick="closeDialogButton()" id="diag-close-button"><img src="./assets/img/close.png"
+                        alt=""></button>
                 <img id="diag-pokemon-sprite" src="./assets/img/logo.png" alt="">
                 <h2 id="diag-pokemon-name">Pokemon Name</h2>
             </header>
@@ -142,43 +144,93 @@
                 <nav class="diag-button-bar">
                     <button onclick="prevDialogPokemonButton()"><img src="./assets/img/arrow.png" alt=""></button>
                     <div class="diag-inner-button-bar">
-                        <button onclick="tabDialogContentButtpn(`1`)" class="diag-inner-button">
+                        <button onclick="tabDialogContentButton(`1`)" class="diag-inner-button">
                             <p>Info</p>
                         </button>
-                        <button onclick="tabDialogContentButtpn(`2`)" class="diag-inner-button">
+                        <button onclick="tabDialogContentButton(`2`)" class="diag-inner-button">
                             <p>Stats</p>
                         </button>
-                        <button onclick="tabDialogContentButtpn(`3`)" class="diag-inner-button">
+                        <button onclick="tabDialogContentButton(`3`)" class="diag-inner-button">
                             <p>Evo</p>
                         </button>
                     </div>
-                    <button onclick="nextDialogPokemonButton()"><img class="mirror" class-arrowRight src="./assets/img/arrow.png" alt=""></button>
+                    <button onclick="nextDialogPokemonButton()"><img class="mirror" class-arrowRight
+                            src="./assets/img/arrow.png" alt=""></button>
                 </nav>
 
                 <div id="diag-content-tab-1" class="diag-stats-container-info diag-content">
-                    <p><img src="./assets/img/genera.png" alt=""> <span id="diag-genera"></span></p>
+                    <p><img src="./assets/img/genera.png" alt=""> <span id="diag-genera"
+                            class="diag-content-subheader"></span></p>
                     <p id="diag-description"></p>
-                    
+
                     <div id="diag-type-bar"></div>
-                    
+
                     <div class="diag-size-bar">
-                        <p><img src="./assets/img/weight.png"  alt=""><span id="diag-weight">3</span></p>
-                        <p><span id="diag-height">5</span><img src="./assets/img/height.png"  alt=""></p>
+                        <p><img src="./assets/img/weight.png" alt=""><span id="diag-weight">3</span></p>
+                        <p><span id="diag-height">5</span><img src="./assets/img/height.png" alt=""></p>
                     </div>
 
                 </div>
                 <div id="diag-content-tab-2" class="diag-stats-container-stats diag-content diag-object-hide">
-                    <p><img src="./assets/img/stats.png" alt=""> <span id="diag-evo-fam">Stats</span></p>
+                    <p><img src="./assets/img/stats.png" alt=""> <span class="diag-content-subheader">Stats</span></p>
+                    <div id="diag-table-container">
+                        <table id="diag-table">
+                            <tr>
+                                <td>HP</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-HP"  class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-HP">3</td>
+
+                            </tr>
+                            <tr>
+                                <td>ATK</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-ATK" class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-ATK">1</td>
+                            </tr>
+                            <tr>
+                                <td>DEF</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-DEF" class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-DEF">2</td>
+                            </tr>
+
+                            <tr>
+                                <td>SATK</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-SATK" class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-SATK">4</td>
+                            </tr>
+                            <tr>
+                                <td>SDEF</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-SDEF" class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-SDEF">5</td>
+                            </tr>
+                            <tr>
+                                <td>SPD</td>
+                                <td class="diag-statsbar">
+                                    <div id="diag-statsbar-SPD" class="diag-statsbar-color"></div>
+                                </td>
+                                <td id="diag-statsbar-value-SPD">6</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div id="diag-content-tab-3" class="diag-stats-container-evo diag-content diag-object-hide">
-                    <p><img src="./assets/img/evolution.png" alt=""> <span id="diag-evo-fam">Evolution-Familiy</span></p>
-                    <div id="diag-evo-container">  </div>
+                    <p><img src="./assets/img/evolution.png" alt=""> <span
+                            class="diag-content-subheader">Evolution-Familiy</span></p>
+                    <div id="diag-evo-container"> </div>
                 </div>
             </section>
-               
-            <footer class="diag-bottom-bar">
-            
 
+            <footer class="diag-bottom-bar">
+                <p>Generation: <span id="diag-generation">1</span></p>
             </footer>
         </div>
     </dialog>
