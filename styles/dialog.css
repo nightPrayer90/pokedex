@@ -29,9 +29,12 @@
                 align-self: flex-end;
                 box-shadow: none;
                 transform: none;
-                background: none;
+                background: #1e1e1e;
                 width: 55px;
                 height: 55px;
+                border-left: solid white 1px;
+                border-bottom: solid white 1px;
+                border-radius: 2px;
 
                 img {
                     width: 45px;
@@ -39,7 +42,7 @@
                 }
             }
             #diag-close-button:hover {
-                background: #1e1e1e;
+                background: #e53935;
             }
 
             #diag-pokemon-sprite {

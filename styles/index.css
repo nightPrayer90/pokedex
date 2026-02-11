@@ -134,8 +134,21 @@ footer {
     align-items: center;
     justify-content: center;
 
-    background: #09212a;
+    background: #1e1e1e;
     height: 128px;
+
+    p, span {
+        font-family: "Lato-Regular";
+        font-size: 18px;
+        text-align: center;
+    }
+
+    a {
+     color: #ffd600;   
+    }
+    a:hover {
+     color: #e53935;   
+    }
 }
 
 /* tablet */

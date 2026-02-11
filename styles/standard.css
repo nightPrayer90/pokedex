@@ -20,3 +20,8 @@
 .mirror {
     transform: scale(-1);
 }
+
+/* only if the dialog is sopen  */
+.overflow-hidden {
+    overflow-y: hidden;
+}

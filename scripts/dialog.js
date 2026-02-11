@@ -5,18 +5,18 @@
 
 //#region Dialog Button ---------------------------------------------------------------------------
 function openDialog(pokeID) {
+    closeBurgerMenus();
     diagIndex = pokeID - 1;
     renderDialog(diagIndex);
-
     diagRef.showModal();
     isDialogOpen = true;
-
-    closeBurgerMenu();
+    document.body.classList.add("overflow-hidden");
 }
 
 function closeDialogButton() {
     diagRef.close();
     isDialogOpen = false;
+    document.body.classList.remove("overflow-hidden");
     lastScrollBoxRef.classList.remove("pokebox-loaded-select");
 }
 
@@ -51,7 +51,6 @@ function prevDialogPokemonButton() {
     renderDialog();
 }
 //#endregion
-
 
 //#region Render Dialog ---------------------------------------------------------------------------
 function renderDialog() {
