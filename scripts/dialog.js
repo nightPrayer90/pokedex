@@ -1,4 +1,9 @@
-//#region dialog Button ---------------------------------------------------------------------------
+/**
+ * .JS for managing all dialog functions
+ * ------------------------------------------------------------------------------------------------
+ */
+
+//#region Dialog Button ---------------------------------------------------------------------------
 function openDialog(pokeID) {
     diagIndex = pokeID - 1;
     renderDialog(diagIndex);
@@ -46,6 +51,7 @@ function prevDialogPokemonButton() {
     renderDialog();
 }
 //#endregion
+
 
 //#region Render Dialog ---------------------------------------------------------------------------
 function renderDialog() {

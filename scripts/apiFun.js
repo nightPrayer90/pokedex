@@ -1,6 +1,16 @@
+/**
+ * .js for all actions with the pokeAPI
+ * Two objects are created.
+ * Object 1: Pokémon with all data for further processing.
+ * Object 2: List of sprites for the corresponding Pokémon types.
+ * ------------------------------------------------------------------------------------------------
+ * */
+
+/** fetch all necessary data for a Pokemon. Note that at 1025, the ID jumps. */
 async function getPokemon(id) {
     try {
-        if (id>1025) {id= id+8975;}
+        if (id > 1025) {id = id + 8975;}
+
         const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         if (pokemon.ok == false) throw new Error("pokemon");
         const pokemonData = await pokemon.json();
@@ -22,11 +32,12 @@ async function getPokemon(id) {
     }
 }
 
+/** returns the edited object for a pokemon */
 async function buildPokemonObject(pokemonData, speciesData, evolutionData) {
     return {
         id: pokemonData.id,
         name: findLanguageEntry(speciesData.names, "name"),
-        loolupName: "#"+pokemonData.id + " " + findLanguageEntry(speciesData.names, "name"), 
+        loolupName: "#" + pokemonData.id + " " + findLanguageEntry(speciesData.names, "name"),
         description: findLanguageEntry(speciesData.flavor_text_entries, "flavor_text"),
         genera: findLanguageEntry(speciesData.genera, "genus"),
         generation: speciesData.generation.name,
@@ -39,10 +50,11 @@ async function buildPokemonObject(pokemonData, speciesData, evolutionData) {
     };
 }
 
+/** find data for the right language */
 function findLanguageEntry(entries, field) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].language.name === loadingLanguage) {
-            return entries[i][field]; 
+            return entries[i][field];
         }
     }
     return null;
@@ -60,6 +72,7 @@ function statsToObject(statsArray) {
     return result;
 }
 
+//** rebuild the typesData to a new array */
 function typesToArray(typsArray) {
     const result = [];
 
@@ -73,11 +86,10 @@ function typesToArray(typsArray) {
     return result;
 }
 
-// TODO: -> Sprites nicht über Name sondern über ID -> name ist nicht valide 
+//** rebuild the coinData to a new object */
 async function buildChainObject(chainObject) {
     const result = {};
 
-    // base
     result[chainObject.species.name] = {
         name: chainObject.species.name,
         gen: 0,
@@ -110,24 +122,28 @@ async function buildChainObject(chainObject) {
     return result;
 }
 
+/** fetching the evoSprites, since the chain only provides URLs to the species. */
 async function fetchEvoSprites(url) {
     try {
         const species = await fetch(url);
         if (species.ok == false) throw new Error(url);
         const speciesData = await species.json();
 
-        const pokemon = await  fetch("https://pokeapi.co/api/v2/pokemon/" + speciesData.id + "/");
+        const pokemon = await fetch("https://pokeapi.co/api/v2/pokemon/" + speciesData.id + "/");
         if (pokemon.ok == false) throw new Error("https://pokeapi.co/api/v2/pokemon/" + speciesData.id + "/");
         const pokemonData = await pokemon.json();
-        
-        return pokemonData.sprites.other.showdown.front_default;
 
+        return pokemonData.sprites.other.showdown.front_default;
     } catch (fetchError) {
-        console.warn("[sprite load failed: ]" +  fetchError);
+        console.warn("[sprite load failed: ]" + fetchError);
         return "";
     }
 }
 
+/**
+ * -----------------------------------------------------
+ * Object of sprites for the corresponding Pokémon types.
+ * */
 async function fetchTypeSprites() {
     try {
         const types = await fetch(`https://pokeapi.co/api/v2/type/`);
@@ -143,7 +159,6 @@ async function fetchTypeSprites() {
                 name: typeData.name,
                 typeId: typeData.id,
                 url: typeData.sprites["generation-viii"]["sword-shield"].name_icon,
-
             });
         }
     } catch (fetchError) {

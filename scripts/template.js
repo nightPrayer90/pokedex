@@ -1,3 +1,8 @@
+/**
+ * JS for template functions
+ * ------------------------------------------------------------------------------------------------ 
+*/
+
 function pokeboxTemplate(pokeID) {
     return /*html*/ `
         <div id="pokebox-${pokeID}" class="pokebox pokebox-placeholder" onclick="openDialog(${pokeID})">
